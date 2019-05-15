@@ -29,9 +29,6 @@ public abstract class Service implements IService {
         getAllServices().stream().forEach(service -> service.closeService());
     }
 
-    public static void beginServices()
-    {
-        getAllServices().stream().forEach(service -> service.initService());
-    }
+
 
 }

@@ -1,5 +1,7 @@
 package me.mat.port.coin;
 
+import me.mat.port.coin.service.StartupService;
+import me.mat.port.coin.service.component.Service;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -16,7 +18,20 @@ public class CoinPlugin extends JavaPlugin {
     public void onEnable()
     {
         instance = this;
+        init(); //Set everything up.
     }
+
+    public void onDisable()
+    {
+        Service.cleanServices();
+    }
+
+    private void init()
+    {
+        new StartupService();
+    }
+
+
 
 
 

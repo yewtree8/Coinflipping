@@ -15,7 +15,6 @@ public abstract class Engine  {
 
     public Engine()
     {
-
         getAllEngines().add(this);
     }
 
