@@ -1,9 +1,11 @@
 package me.mat.port.coin.entity;
 
+import me.mat.port.coin.util.Log;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.EulerAngle;
 
 import java.util.Random;
 
@@ -79,6 +81,8 @@ public class Coin {
         getCoin().setGravity(false);
         getCoin().setVisible(false);
         getCoin().setHelmet(new ItemStack(Material.DOUBLE_PLANT));
+        double x  = Math.toRadians(0);
+        getCoin().setHeadPose(new EulerAngle(x, 0, 0));
     }
 
 
@@ -94,23 +98,29 @@ public class Coin {
 
     /**
      * This rotates the coin as if it is flipping in the air
-     * max it will go is 180 and smallest -180.
+     * max it will go is 90 and smallest -90.
      * rotating at 25 degrees a tenth of a tick
      */
     public void rotateCoin()
     {
-        float pitch = getCoin().getLocation().getPitch();
-        float newPitch = pitch + 25;
-        if(newPitch >= 180) //max pitch
+        float newPitch = currentLocation.clone().getPitch() + 15;
+        if(newPitch <= 89 && newPitch > 0) //max pitch
         {
-            getCoin().getLocation().setPitch(-155); //180 - 25 so it doesn't glitch
-            moveTo(getCoin().getLocation());
+            Log.print("new pitch" + (newPitch) + "");
+            double x = Math.toRadians((newPitch));
+            EulerAngle angle = new EulerAngle(x, 0, 0);
+            getCoin().setHeadPose(angle);
+            currentLocation.setPitch(newPitch);
+            moveTo(currentLocation);
         }
         else
         {
-            Location nextLoc = getCoin().getLocation();
-            nextLoc.setPitch(getCoin().getLocation().getPitch() + 25);
-            moveTo(nextLoc);
+            double x = Math.toRadians(-newPitch);
+            Log.print("new pitch" + (-newPitch) + "");
+            EulerAngle angle = new EulerAngle(x, 0, 0);
+            getCoin().setHeadPose(angle);
+            currentLocation.setPitch(-newPitch);
+            moveTo(currentLocation);
         }
     }
 

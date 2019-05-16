@@ -79,7 +79,7 @@ public class FlipMotion extends EntityMovementPath implements IAnimation {
         float totalFrames = ( (2 * 10) * 2) + (2 * 10); //total frames at one tenth of a tick
         float halfPoint = totalFrames / 2;
         float totalBlocksToTravel = 3;
-        float spacesMovedPerTick = ( ( (totalFrames / animationTotalSecs) / totalBlocksToTravel ) / 6 ) / 10;
+        float spacesMovedPerTick = ( ( ( (totalFrames / animationTotalSecs) / totalBlocksToTravel ) / 6 ) / 10 ) / 3;
         movementTimer = new BukkitRunnable() {
 
             public void run()
@@ -93,17 +93,18 @@ public class FlipMotion extends EntityMovementPath implements IAnimation {
                     return; //if the timer has run its course stop
                 }
 
-                getCoin().rotateCoin(); //Rotate the coin
 
                 if(frameCount <= halfPoint) //going up
                 {
                     currentCoinLocation = getCoin().getCoin().getLocation().add(0, spacesMovedPerTick, 0);
                     getCoin().moveTo(currentCoinLocation);
+                    getCoin().rotateCoin(); //Rotate the coin
                 }
                 else //going back down.
                 {
                     currentCoinLocation = getCoin().getCoin().getLocation().subtract(0, spacesMovedPerTick, 0);
                     getCoin().moveTo(currentCoinLocation);
+                    getCoin().rotateCoin(); //Rotate the coin
                 }
                 //find the new location
 
