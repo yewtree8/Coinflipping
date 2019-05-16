@@ -26,8 +26,11 @@ public abstract class Service implements IService {
 
     public static void cleanServices()
     {
-        getAllServices().stream().forEach(service -> service.closeService());
+        getAllServices().forEach(service -> {
+            if(service != null) service.closeService();
+        });
     }
+
 
 
 

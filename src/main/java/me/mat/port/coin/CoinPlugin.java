@@ -1,5 +1,6 @@
 package me.mat.port.coin;
 
+import me.mat.port.coin.cmd.FlipCoinCommand;
 import me.mat.port.coin.service.StartupService;
 import me.mat.port.coin.service.component.Service;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,7 +29,13 @@ public class CoinPlugin extends JavaPlugin {
 
     private void init()
     {
+        registerCommands();
         new StartupService();
+    }
+
+    private void registerCommands()
+    {
+        this.getCommand("flipcoin").setExecutor(new FlipCoinCommand());
     }
 
 

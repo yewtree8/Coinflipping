@@ -17,8 +17,6 @@ import java.util.Vector;
  */
 public abstract class EntityMovementPath {
 
-    private static Vector<Integer> timerLists = new Vector<>(); //HOLD ID OF TASKS
-    public static Vector<Integer> getEntityMovementTimers() {return timerLists;}
 
     private BukkitTask movementTimer;
 
@@ -37,20 +35,16 @@ public abstract class EntityMovementPath {
     {
         this.movingEntity = entity;
         this.location = initialLocation;
-        timerLists.add(getMovementTimer().getTaskId());
     }
 
     /**
      * Constructor for player based movements, easier to get eye direction
      * etc.
      * @param playerUUID - UUID of player, don't want to store the actual instance.
-     * @param toMove - Still the entity that's being moved / animated.
      */
-    public EntityMovementPath(UUID playerUUID, Entity toMove)
+    public EntityMovementPath(UUID playerUUID)
     {
         this.playerID = playerUUID;
-        this.movingEntity = toMove;
-        this.timerLists.add(getMovementTimer().getTaskId()); //Ready for cleanup
     }
 
     /**
@@ -74,13 +68,27 @@ public abstract class EntityMovementPath {
         return this.movingEntity;
     }
 
+
+
+
+
     /**
-     * Get the bukkit task, this is initially null
-     * @return The timer that shall handle the animation.
+     * Obviously need the UUID
+     * @return UUID of player
      */
-    public BukkitTask getMovementTimer()
+    public UUID getPlayerID()
     {
-        return this.movementTimer;
+        return playerID;
     }
+
+    /**
+     * Instead of having to rebuild the player instance.
+     * @return Player object that flippedf
+     */
+    public Player getPlayer()
+    {
+        return Bukkit.getPlayer(getPlayerID());
+    }
+
 
 }

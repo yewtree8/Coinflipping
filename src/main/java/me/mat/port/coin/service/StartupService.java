@@ -22,7 +22,6 @@ public class StartupService extends Service {
     public void initService()
     {
         registerListeners();
-        registerCommands();
     }
 
     /**
@@ -38,10 +37,6 @@ public class StartupService extends Service {
         }
     }
 
-    private void registerCommands()
-    {
-        CoinPlugin pl = CoinPlugin.getInstance();
-        pl.getCommand("flipcoin").setExecutor(new FlipCoinCommand());
-    }
+
 
 }
