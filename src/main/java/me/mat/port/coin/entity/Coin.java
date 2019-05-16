@@ -103,25 +103,12 @@ public class Coin {
      */
     public void rotateCoin()
     {
-        float newPitch = currentLocation.clone().getPitch() + 15;
-        if(newPitch <= 89 && newPitch > 0) //max pitch
-        {
-            Log.print("new pitch" + (newPitch) + "");
-            double x = Math.toRadians((newPitch));
-            EulerAngle angle = new EulerAngle(x, 0, 0);
-            getCoin().setHeadPose(angle);
-            currentLocation.setPitch(newPitch);
-            moveTo(currentLocation);
-        }
-        else
-        {
-            double x = Math.toRadians(-newPitch);
-            Log.print("new pitch" + (-newPitch) + "");
-            EulerAngle angle = new EulerAngle(x, 0, 0);
-            getCoin().setHeadPose(angle);
-            currentLocation.setPitch(-newPitch);
-            moveTo(currentLocation);
-        }
+        float newPitch = currentLocation.getPitch() + 35;
+        double x = Math.toRadians(newPitch);
+        EulerAngle a = new EulerAngle(x, 0, 0);
+        getCoin().setHeadPose(a);
+        currentLocation.setPitch(newPitch);
+        moveTo(currentLocation);
     }
 
 

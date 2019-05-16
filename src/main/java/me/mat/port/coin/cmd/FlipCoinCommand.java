@@ -2,6 +2,7 @@ package me.mat.port.coin.cmd;
 
 import me.mat.port.coin.animate.movement.FlipMotion;
 import me.mat.port.coin.util.Log;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +23,7 @@ public class FlipCoinCommand implements CommandExecutor {
             Player player = (Player) sender;
             if(args.length==0)
             {
-                player.sendMessage("Trying to flip");
+                player.sendMessage(ChatColor.GREEN + "Flipping the coin, what shall it land on?");
                 new FlipMotion(player.getUniqueId());
             }
             else

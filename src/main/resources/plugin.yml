@@ -1,7 +1,7 @@
 name: FlashyCoinFlip
 description: Allows the user to do a flashy coin flip
 main: me.mat.port.coin.CoinPlugin
-version: 0.2
+version: 0.9
 commands:
   flipcoin:
     description: Flips coin.

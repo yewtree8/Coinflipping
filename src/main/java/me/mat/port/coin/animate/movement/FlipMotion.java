@@ -6,6 +6,7 @@ import me.mat.port.coin.animate.IAnimation;
 import me.mat.port.coin.entity.Coin;
 import me.mat.port.coin.entity.CoinResult;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -76,7 +77,7 @@ public class FlipMotion extends EntityMovementPath implements IAnimation {
     private void beginFlipping()
     {
         float animationTotalSecs = 2.5f;
-        float totalFrames = ( (2 * 10) * 2) + (2 * 10); //total frames at one tenth of a tick
+        float totalFrames = ( (2 * 10) * 3) + (2 * 10); //total frames at one tenth of a tick
         float halfPoint = totalFrames / 2;
         float totalBlocksToTravel = 3;
         float spacesMovedPerTick = ( ( ( (totalFrames / animationTotalSecs) / totalBlocksToTravel ) / 6 ) / 10 ) / 3;
@@ -88,7 +89,7 @@ public class FlipMotion extends EntityMovementPath implements IAnimation {
                 Location currentCoinLocation;
                 if(frameCount >= totalFrames) //Just to stop
                 {
-                    getPlayer().sendMessage("You got " + getFlipResult().getName());
+                    getPlayer().sendMessage(ChatColor.AQUA + "Seems like it landed on " + getCoin().findResult().getName());
                     clearAnimation();
                     return; //if the timer has run its course stop
                 }
@@ -110,7 +111,7 @@ public class FlipMotion extends EntityMovementPath implements IAnimation {
 
             }
 
-        }.runTaskTimer(CoinPlugin.getInstance(), 0, 2L);
+        }.runTaskTimer(CoinPlugin.getInstance(), 0, 1L);
     }
 
 
@@ -124,7 +125,7 @@ public class FlipMotion extends EntityMovementPath implements IAnimation {
         Location loc = getPlayer().getEyeLocation(); //Get the eye loc
         Vector eyeDirection = getPlayer().getLocation().getDirection(); //Get the direction
         Location inFrontOf = loc.add(eyeDirection); //Get the block in front of the players eye.
-        inFrontOf.subtract(0, 1, 0); //Go down a block so it's by the feet
+        inFrontOf.subtract(0, 1.35, 0); //Go down a block so it's by the feet
         return inFrontOf;
     }
 
